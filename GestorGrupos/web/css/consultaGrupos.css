@@ -1,0 +1,52 @@
+/*
+    Programación 4 - Proyecto #1
+    26 Abril 2019
+
+    Document   : consultaGrupos.css
+    Author     : Rachel Basulto 801030879
+                 Danny Gómez    116440310
+*/
+
+html{
+    background-color: #e6e6da;
+    font-family: 'Vollkorn', serif;
+}
+
+#encabezado{
+    border-bottom: rgba(57,57,56,0.80) solid 2px;
+    border-top: rgba(57,57,56,0.80) solid 2px;
+    padding: 7px;
+}
+
+#barra{
+    width: 100%;
+}
+
+.th{
+    font-size: 17px;
+    padding: 0;
+    color: #0c0c0c;
+    cursor: pointer;
+}
+
+.th:hover{
+    opacity: 0.85;
+    font-size: 20px;
+}
+
+#gestor{
+    font-size: 50px;
+    font-family: 'Cookie', cursive;
+    float: left;
+    margin-left: 5%;
+    
+}
+
+html{
+    background: url("https://images.pexels.com/photos/1985167/pexels-photo-1985167.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: 1800px 800px;
+}
+
