@@ -2,7 +2,7 @@
     Programación 4 - Proyecto #1
     26 Abril 2019
 
-    Document   : consultaGrupos.css
+    Document   : usuarios.css
     Author     : Rachel Basulto 801030879
                  Danny Gómez    116440310
 */
@@ -17,7 +17,7 @@ html{
     font-family: 'Vollkorn', serif;
 }
 
-/******************* BARRA **********************/
+ /******************* BARRA **********************/
 
 #encabezado{
     border-bottom: rgba(24,24,24,0.90) solid 2px;
@@ -53,5 +53,13 @@ html{
 }
 
  /******************* BARRA **********************/
-
-
+ 
+ #cuerpo{
+     margin-left: 1%; 
+ }
+ 
+ h3{
+   font-size: 25px;
+   text-decoration: underline;
+    margin-top: 3%;
+}

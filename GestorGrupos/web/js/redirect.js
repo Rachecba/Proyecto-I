@@ -22,3 +22,7 @@ function redirectCrearGrupos(){
 function redirectUsuarios(){
     location.replace("usuarios.jsp");
 }
+
+function logout(){
+    location.replace("index.jsp");
+}

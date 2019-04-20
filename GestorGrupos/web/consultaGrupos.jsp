@@ -26,12 +26,12 @@
                 <th class='th' id="verGrupos" onclick="redirectVerGrupos()">Ver Grupos</th>
                 <th class='th' id="crearGrupo" onclick="redirectCrearGrupos()">Crear/Unirse a Grupo</th>
                 <th class='th' id="usuarios" onclick="redirectUsuarios()">Ver usuarios</th>
+                <th class='th' id="logout" onclick="logout()">Salir</th>
                 </thead>
             </table>
         </div>
         <div id='grupos'>
-             <jsp:useBean class="modelo.dao.GestorGrupos" id="g1"></jsp:useBean>
-              ${g1.tablasGrupos} 
+            
         </div>
     </body>
 </html>

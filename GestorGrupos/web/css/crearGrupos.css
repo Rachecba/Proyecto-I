@@ -17,7 +17,7 @@ html{
     font-family: 'Vollkorn', serif;
 }
 
-/******************* BARRA **********************/
+ /******************* BARRA **********************/
 
 #encabezado{
     border-bottom: rgba(24,24,24,0.90) solid 2px;
@@ -54,4 +54,42 @@ html{
 
  /******************* BARRA **********************/
 
+ #cuerpo{
+    margin-left: 1%; 
+ }
+ 
+ form{
+     margin-left: 2%;
+ }
+ 
+ input[type=text] {
+    width: 12.5%;
+    padding: 7px 7px;
+    margin: 8px 8px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 3px;
+}
 
+button{
+    color: black;
+    padding: 5px 0px;
+    cursor: pointer;
+    width: 5%;
+    border-radius: 3px;
+    background-color: #c7c5c5; 
+}
+
+#crear{
+    margin-top: 3%;
+}
+
+#salir, #tablas{
+    margin-top: 5%;
+}
+
+h3{
+   font-size: 25px;
+   text-decoration: underline;
+}
