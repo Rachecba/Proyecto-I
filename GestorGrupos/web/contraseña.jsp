@@ -8,6 +8,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="login" uri="/WEB-INF/tlds/login" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -17,7 +18,8 @@
         <script src="js/redirect.js" type="text/javascript"></script>
         <title>Cambiar Contraseña</title>
     </head>
-    <body>
+    <body onload="init();">
+        ${login:logged()}
         <div id='encabezado'>
             <table id='barra'>
                 <thead>
@@ -32,14 +34,11 @@
         </div>
         <div id="h1">
             <h2> Cambiar Contraseña </h2>
-            <!-- <div id='imgcontainer'>
-             <img src="../src/java/images/user.jpg" alt=""/> 
-            </div>-->
         </div>
         <form action="ServicioPassword" method="post" name="loginForm">
             <div class="container">
                 <label for="username"><br>Usuario</label><br>
-                <input type="text" placeholder="Ingrese usuario" name="username" required>
+                <input type="text" placeholder="Ingrese usuario" name="username" id="input" required>
                 <label for="password"><br>Contraseña nueva</label><br>
                 <input type="password" placeholder="Ingrese nueva contraseña" name="password" required><br>
                 <button type="submit">Cambiar</button><br>

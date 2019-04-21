@@ -2,7 +2,7 @@
     Programación 4 - Proyecto #1
     26 Abril 2019
 
-    Document   : contraseña.jsp
+    Document   : grupo.java
     Author     : Rachel Basulto 801030879
                  Danny Gómez    116440310
  */
@@ -75,5 +75,7 @@ public class Grupo implements Serializable{
         this.activo = activo;
     }
     
-    
+    public void agregarEstudiante(Usuario u){
+        estudiantes.add(u);
+    }
 }

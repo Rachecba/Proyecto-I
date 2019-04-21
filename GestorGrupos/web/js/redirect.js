@@ -24,5 +24,6 @@ function redirectUsuarios(){
 }
 
 function logout(){
-    location.replace("index.jsp");
+    document.forms[0].action = "ServicioLogout";
+    document.forms[0].submit();
 }

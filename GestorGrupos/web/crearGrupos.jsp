@@ -8,6 +8,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="login" uri="/WEB-INF/tlds/login" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,6 +19,7 @@
         <title>Crear Grupos</title>
     </head>
     <body>
+        ${login:logged()}
         <div id='encabezado'>
             <table id='barra'>
                 <thead>

@@ -2,7 +2,7 @@
     Programación 4 - Proyecto #1
     26 Abril 2019
 
-    Document   : contraseña.jsp
+    Document   : ServicioPassword.java
     Author     : Rachel Basulto 801030879
                  Danny Gómez    116440310
  */
@@ -16,34 +16,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelo.dao.GestorUsuarios;
 
-@WebServlet(name = "SercicioPassword", urlPatterns = {"/SercicioPassword"})
-public class SercicioPassword extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+@WebServlet(name = "ServicioPassword", urlPatterns = {"/ServicioPassword"})
+public class ServicioPassword extends HttpServlet {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet SercicioPassword</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet SercicioPassword at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        
+        String nueva = request.getParameter("password");
+        
+        GestorUsuarios.obtenerInstancia().cambiarPass(nueva);
+        
+        response.sendRedirect("consultaGrupos.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

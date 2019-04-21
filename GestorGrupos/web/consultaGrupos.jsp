@@ -8,6 +8,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="login" uri="/WEB-INF/tlds/login" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -17,18 +18,21 @@
         <script src="js/redirect.js" type="text/javascript"></script>
         <title>Ver Grupos</title>
     </head>
-    <body>
+    <body onload="init();">
+        ${login:logged()}
         <div id='encabezado'>
-            <table id='barra'>
-                <thead>
-                <th id='gestor'>Gestor de Grupos</th>
-                <th class='th' id="pass" onclick="redirectPass()">Cambiar Contraseña</th>
-                <th class='th' id="verGrupos" onclick="redirectVerGrupos()">Ver Grupos</th>
-                <th class='th' id="crearGrupo" onclick="redirectCrearGrupos()">Crear/Unirse a Grupo</th>
-                <th class='th' id="usuarios" onclick="redirectUsuarios()">Ver usuarios</th>
-                <th class='th' id="logout" onclick="logout()">Salir</th>
-                </thead>
-            </table>
+            <form action="ServicioLogout">
+                <table id='barra'>
+                    <thead>
+                    <th id='gestor'>Gestor de Grupos</th>
+                    <th class='th' id="pass" onclick="redirectPass()">Cambiar Contraseña</th>
+                    <th class='th' id="verGrupos" onclick="redirectVerGrupos()">Ver Grupos</th>
+                    <th class='th' id="crearGrupo" onclick="redirectCrearGrupos()">Crear/Unirse a Grupo</th>
+                    <th class='th' id="usuarios" onclick="redirectUsuarios()">Ver usuarios</th>
+                    <th class='th' id="logout" onclick="logout()">Salir</th>
+                    </thead>
+                </table>
+            </form>
         </div>
         <div id='grupos'>
             

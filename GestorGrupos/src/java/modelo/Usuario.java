@@ -86,5 +86,4 @@ public class Usuario implements Serializable{
         this.grupo = grupo;
     }
     
-    
 }

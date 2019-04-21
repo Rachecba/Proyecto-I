@@ -19,6 +19,9 @@
         <title>Login</title>
     </head>
     <body>
+        <% HttpSession sesionActual;
+           sesionActual = request.getSession(true);
+           /*sesionActual.invalidate();*/ %>
         <div id='encabezado'>
             <table id='barra'>
                 <thead>
@@ -36,7 +39,7 @@
              <img src="../src/java/images/user.jpg" alt=""/> 
             </div>-->
         </div>
-        <form action="ServicioLogin" method="post" name="loginForm">
+        <form action="ServicioLogin" method="post" id="loginForm">
             <div class="container">
                 <label for="username"><br>Usuario</label><br>
                 <input type="text" placeholder="Ingrese usuario" name="username" required>
@@ -45,6 +48,6 @@
                 <button type="submit">Entrar</button><br>
             </div>
         </form>
-        <p id='aviso'>Si es primera vez que ingresa, use su numero de cédula como contraseña</p>
+        <p id='aviso'>Si es primera vez que ingresa, use su número de cédula como contraseña</p>
     </body>
 </html>
