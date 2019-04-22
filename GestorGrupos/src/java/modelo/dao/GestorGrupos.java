@@ -55,11 +55,12 @@ public class GestorGrupos implements Serializable{
                 ResultSet rs = stm.executeQuery(CMD_LISTARGRUPOS);)
         {
             while(rs.next()){
+                List<Usuario> usuarios = new ArrayList<>();
                 int id = rs.getInt("id");
                 String nombre = rs.getString("nombre");
                 int cupo = rs.getInt("cupo");
                 boolean activo = rs.getBoolean("activo");
-                lista.add(new Grupo(id, nombre, cupo, null, activo));                
+                lista.add(new Grupo(id, nombre, cupo, usuarios, activo));                
             }
         }catch(SQLException ex){
             System.err.printf("Excepción: '%s'%n", ex.getMessage());
@@ -73,11 +74,14 @@ public class GestorGrupos implements Serializable{
         List<Usuario> estudiantes = GestorUsuarios.obtenerInstancia().listarEstudiantes();
         
         for(Grupo g : grupos){
-            for(Usuario u : estudiantes){
-                if(u.getGrupo() == g.getId())
-                    g.agregarEstudiante(u);
-            }
+                for(Usuario u : estudiantes){
+                    if(u.getGrupo() == g.getId()){
+                        g.agregarEstudiante(u);
+                    }
+                }
         }
+
+        //ver si tengo que hacer un ++ del cupo de los grupos cuando agrego estudiantes al grupo. 
         
         return grupos;
     }
@@ -101,11 +105,11 @@ public class GestorGrupos implements Serializable{
             s.append("</thead>");
             s.append("<tbody>");
             
-            if(g.getEstudiantes() != null){ //Si el grupo SI tiene estudiantes, genere las filas, con el nombre y apellidos de cada estudiante de ese grupo
+            if(!g.getEstudiantes().isEmpty()){ //Si el grupo SI tiene estudiantes, genere las filas, con el nombre y apellidos de cada estudiante de ese grupo
                 for(Usuario u : g.getEstudiantes()){
                         s.append("<tr class='filas'>");
                         s.append(String.format("<td>%s</td>", u.getApellidos()));
-                        s.append(String.format("<td></td>", u.getNombre()));
+                        s.append(String.format("<td>%s</td>", u.getNombre()));
                         s.append("</tr>");
                 }
             }else{

@@ -9,16 +9,19 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="login" uri="/WEB-INF/tlds/login" %>
+
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="css/consultaGrupos.css" rel="stylesheet" type="text/css"/>
         <link href="https://fonts.googleapis.com/css?family=Cookie|Vollkorn" rel="stylesheet"> 
+        <script src="js/tablasGrupos.js" type="text/javascript"></script>
         <script src="js/redirect.js" type="text/javascript"></script>
         <title>Ver Grupos</title>
     </head>
     <body onload="init();">
+        <jsp:include page="/ServicioSesion" />
         ${login:logged()}
         <div id='encabezado'>
             <form action="ServicioLogout">
@@ -35,7 +38,8 @@
             </form>
         </div>
         <div id='grupos'>
-            
+            <jsp:useBean class="modelo.dao.GestorGrupos" id="g1"></jsp:useBean>
+            ${g1.gruposHTML()}
         </div>
     </body>
 </html>

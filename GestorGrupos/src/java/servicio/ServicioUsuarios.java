@@ -2,52 +2,61 @@
     Programación 4 - Proyecto #1
     26 Abril 2019
 
-    Document   : ServicioLogin.java
+    Document   : ServicioUsuarios.java
     Author     : Rachel Basulto 801030879
                  Danny Gómez    116440310
  */
-
 package servicio;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import modelo.dao.GestorLogin;
+import modelo.Grupo;
+import modelo.Usuario;
+import modelo.dao.GestorGrupos;
 import modelo.dao.GestorUsuarios;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
-@WebServlet(name = "ServicioLogin", urlPatterns = {"/ServicioLogin"})
-public class ServicioLogin extends HttpServlet {
-    
+/**
+ *
+ * @author Rache Basulto
+ */
+@WebServlet(name = "ServicioUsuarios", urlPatterns = {"/ServicioUsuarios"})
+public class ServicioUsuarios extends HttpServlet {
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("application/json;charset=UTF-8");
         
-        response.setHeader("cache-control", "no-cache, no-store, must-revalidate");
-        
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        Date date = new Date();
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        
-        if(GestorLogin.obtenerInstancia().validateLogin(username, password)){
-            HttpSession session = request.getSession(true);
-            session.setAttribute("user",username);
-            session.setMaxInactiveInterval(60 * 5);
-            GestorUsuarios.obtenerInstancia().updateSesion(dateFormat.format(date));
-            response.sendRedirect("consultaGrupos.jsp");
+        try (PrintWriter out = response.getWriter()) {
+            List<Usuario> usuarios = GestorUsuarios.obtenerInstancia().listarEstudiantes();
+           // DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            System.out.println(usuarios);
+            
+            JSONObject obj = new JSONObject();
+            JSONArray array = new JSONArray();
+            
+            for(Usuario u : usuarios){
+                JSONObject pobj = new JSONObject();
+                pobj.put("id", u.getId());
+                pobj.put("ultimo_acceso", u.getUltimo_acceso());
+                array.put(pobj);
+            }
+            
+            obj.put("usuarios", array);
+            System.out.println(obj);
+            out.print(obj);
         }
-        else{
-            response.sendRedirect("index.jsp");
-        }
-        
     }
-    
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -62,7 +71,7 @@ public class ServicioLogin extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
-    
+
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -76,7 +85,7 @@ public class ServicioLogin extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
-    
+
     /**
      * Returns a short description of the servlet.
      *

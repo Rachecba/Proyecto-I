@@ -19,6 +19,7 @@
         <title>Cambiar Contraseña</title>
     </head>
     <body onload="init();">
+         <jsp:include page="/ServicioSesion" />
         ${login:logged()}
         <div id='encabezado'>
             <table id='barra'>

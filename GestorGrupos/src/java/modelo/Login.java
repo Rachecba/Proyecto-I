@@ -14,7 +14,7 @@ import java.util.Date;
 public class Login implements Serializable{
     private String id;
     private String clave;
-    private Date ultimo_acceso;
+    private String ultimo_acceso;
     
     public Login(){
         this.id = null;
@@ -22,7 +22,7 @@ public class Login implements Serializable{
         this.ultimo_acceso = null;
     }
     
-    public Login(String id, String clave, Date acceso){
+    public Login(String id, String clave, String acceso){
         this.id = id;
         this.clave = clave;
         this.ultimo_acceso = acceso;
@@ -44,11 +44,11 @@ public class Login implements Serializable{
         this.clave = clave;
     }
 
-    public Date getUltimo_acceso() {
+    public String getUltimo_acceso() {
         return ultimo_acceso;
     }
 
-    public void setUltimo_acceso(Date ultimo_acceso) {
+    public void setUltimo_acceso(String ultimo_acceso) {
         this.ultimo_acceso = ultimo_acceso;
     }
     

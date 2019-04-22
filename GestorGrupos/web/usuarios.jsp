@@ -15,10 +15,12 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="css/usuarios.css" rel="stylesheet" type="text/css"/>
         <link href="https://fonts.googleapis.com/css?family=Cookie|Vollkorn" rel="stylesheet"> 
+        <script src="js/usuarios.js" type="text/javascript"></script>
         <script src="js/redirect.js" type="text/javascript"></script>
         <title>Usuarios</title>
     </head>
-    <body>
+    <body onload="init();">
+         <jsp:include page="/ServicioSesion" />
         ${login:logged()}
         <div id='encabezado'>
             <table id='barra'>
@@ -34,6 +36,19 @@
         </div>
         <div id="cuerpo">
             <h3> Usuarios </h3>
+            <div id="tablaUsuarios">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Usuario</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody id="listaUsuarios">
+                        
+                    </tbody>
+                </table>
+            </div>
             <!--A los usuarios que estan activos les pongo un puntito verde al lado, o una etiqueta verde diciendo que esta activo -->
             <!-- NOTA: Incluya una opción para ver la lista de usuarios junto con la información del grupo de trabajo, 
                        ordenada por: grupo de trabajo (1), grupo matriculado (2), número de identificación (3) o apellidos y nombre (4)-->

@@ -2,14 +2,14 @@
     Programación 4 - Proyecto #1
     26 Abril 2019
 
-    Document   : ServicioLogin.java
+    Document   : ServicioSesion.java
     Author     : Rachel Basulto 801030879
                  Danny Gómez    116440310
  */
-
 package servicio;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -22,32 +22,34 @@ import javax.servlet.http.HttpSession;
 import modelo.dao.GestorLogin;
 import modelo.dao.GestorUsuarios;
 
-@WebServlet(name = "ServicioLogin", urlPatterns = {"/ServicioLogin"})
-public class ServicioLogin extends HttpServlet {
-    
+@WebServlet(name = "ServicioSesion", urlPatterns = {"/ServicioSesion"})
+public class ServicioSesion extends HttpServlet {
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        response.setIntHeader("Refresh", 1);
         
-        response.setHeader("cache-control", "no-cache, no-store, must-revalidate");
-        
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date date = new Date();
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
         
-        if(GestorLogin.obtenerInstancia().validateLogin(username, password)){
-            HttpSession session = request.getSession(true);
-            session.setAttribute("user",username);
-            session.setMaxInactiveInterval(60 * 5);
-            GestorUsuarios.obtenerInstancia().updateSesion(dateFormat.format(date));
-            response.sendRedirect("consultaGrupos.jsp");
-        }
-        else{
-            response.sendRedirect("index.jsp");
+        HttpSession session = request.getSession();
+        
+        if (!session.isNew()) {  //mientras no sea una nueva sesion
+            Date hourAgo = new Date(System.currentTimeMillis() - 60 * 5 * 1000);
+            Date accessed = new Date(session.getLastAccessedTime());
+            
+            if (accessed.before(hourAgo)) {
+                session.invalidate(); //cierro sesion
+                GestorLogin.obtenerInstancia().setValidado(false);
+                GestorUsuarios.obtenerInstancia().updateSesion(dateFormat.format(date));
+                response.sendRedirect("index.jsp"); //redirijo a login
+            }else{
+                GestorUsuarios.obtenerInstancia().updateSesion(dateFormat.format(date));
+            }
         }
         
     }
-    
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -62,7 +64,7 @@ public class ServicioLogin extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
-    
+
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -76,7 +78,7 @@ public class ServicioLogin extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
-    
+
     /**
      * Returns a short description of the servlet.
      *

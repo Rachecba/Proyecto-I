@@ -17,10 +17,10 @@ public class Usuario implements Serializable{
     String password;
     String nombre;
     String apellidos;
-    Date ultimo_acceso;
+    String ultimo_acceso;
     int grupo;
 
-    public Usuario(String id, String password, String nombre, String apellidos, Date ultimo_acceso, int grupo) {
+    public Usuario(String id, String password, String nombre, String apellidos, String ultimo_acceso, int grupo) {
         this.id = id;
         this.password = password;
         this.nombre = nombre;
@@ -70,11 +70,11 @@ public class Usuario implements Serializable{
         this.apellidos = apellidos;
     }
 
-    public Date getUltimo_acceso() {
+    public String getUltimo_acceso() {
         return ultimo_acceso;
     }
 
-    public void setUltimo_acceso(Date ultimo_acceso) {
+    public void setUltimo_acceso(String ultimo_acceso) {
         this.ultimo_acceso = ultimo_acceso;
     }
 

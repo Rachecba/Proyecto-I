@@ -19,6 +19,7 @@
         <title>Crear Grupos</title>
     </head>
     <body>
+         <jsp:include page="/ServicioSesion" />
         ${login:logged()}
         <div id='encabezado'>
             <table id='barra'>

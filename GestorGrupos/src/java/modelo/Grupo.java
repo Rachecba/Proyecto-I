@@ -10,6 +10,7 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Grupo implements Serializable{
@@ -31,7 +32,7 @@ public class Grupo implements Serializable{
         id = 0;
         nombre = null;
         cupo = 0;
-        estudiantes = null;
+        estudiantes = new ArrayList<>();
         activo = false;
     }
 

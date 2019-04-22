@@ -35,6 +35,7 @@ public class GestorUsuarios implements Serializable{
     private static final String CLAVE = "root";
     private static final String CMD_LISTARESTUDIANTES = "SELECT id, apellidos, nombre, clave, ultimo_acceso, grupo_id FROM eif209_1901_p01.estudiante";
     private static final String CMD_PASSWORD = "UPDATE eif209_1901_p01.estudiante SET clave = '%s' WHERE id = '%s';";
+    private static final String CMD_SESION = "UPDATE eif209_1901_p01.estudiante SET ultimo_acceso = '%s' WHERE id = '%s';";
     public Connection conn;
     
     public GestorUsuarios(){
@@ -64,17 +65,8 @@ public class GestorUsuarios implements Serializable{
                 String apellidos = rs.getString("apellidos");
                 String nombre = rs.getString("nombre");
                 String clave = rs.getString("clave");
-                String acceso = rs.getString("ultimo_acceso");
+                String ultimo_acceso = rs.getString("ultimo_acceso");
                 int grupo = rs.getInt("grupo_id");
-                Date ultimo_acceso = null;
-                
-                if(acceso != null){
-                    try {
-                        ultimo_acceso = new SimpleDateFormat("dd/MM/yyyy").parse(acceso);
-                    } catch (ParseException ex) {
-                        Logger.getLogger(GestorUsuarios.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
                 
                 lista.add(new Usuario(id, clave, nombre, apellidos, ultimo_acceso, grupo));
             }
@@ -92,6 +84,18 @@ public class GestorUsuarios implements Serializable{
                 Statement stm = conexion.createStatement();)
         {
             stm.executeUpdate(String.format(CMD_PASSWORD, nueva, logged.getId()));
+        }catch(SQLException ex){
+            System.err.printf("Excepción: '%s'%n", ex.getMessage());
+        }
+    }
+    
+    public void updateSesion(String sesion){
+        Login logged = GestorLogin.obtenerInstancia().getLogged();
+        
+         try(Connection conexion = DriverManager.getConnection(CONEXION, USUARIO, CLAVE);
+                Statement stm = conexion.createStatement();)
+        {
+            stm.executeUpdate(String.format(CMD_SESION, sesion, logged.getId()));
         }catch(SQLException ex){
             System.err.printf("Excepción: '%s'%n", ex.getMessage());
         }

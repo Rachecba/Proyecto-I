@@ -10,6 +10,9 @@
 package servicio;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,15 +20,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import modelo.dao.GestorLogin;
+import modelo.dao.GestorUsuarios;
 
 @WebServlet(name = "ServicioLogout", urlPatterns = {"/ServicioLogout"})
 public class ServicioLogout extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
         GestorLogin.obtenerInstancia().setValidado(false);
         HttpSession sesion = request.getSession(true);
         sesion.invalidate();
+        GestorUsuarios.obtenerInstancia().updateSesion(dateFormat.format(date));
         response.sendRedirect("index.jsp");
     }
 
